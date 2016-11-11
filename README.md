@@ -12,55 +12,80 @@ Clojure HTML templating library. Hiccup + Selectors = Wow.
 ### Hiccup
 Sneeze uses hiccup. When you want something more powerful you can sneeze.
 ### Enlive
-Sneeze has enlive for inspiration. Enlive is great for reading .html files into
+Sneeze also uses enlive. Enlive is great for reading .html files into
 clojure and running transformations on them using selectors. It falls short in
 hiccup compatibility and composability. Enlive is very macro heavy and this can
 cause issues when your usage isn't quite in the target use case.
 ### Enliven
 Enlive v2. It's not quite baked and edible. 
-### Selmer
-Never used it, so can't really say.
+### Others
+Never used these, no comment.
+- Selmer
+- Fleet
+
+## Installation
+
+Add the following dependency to your `project.clj`:
+
+    [sneeze "0.1.0"]
 
 ## Usage
 
-    (ns myproject.namespace
-      (:require [sneeze.core :as sneeze]))
+```clojure
+(ns myproject.namespace
+  (:require [sneeze.core :as sneeze]))
 
-    (def base-html
-      [:html
-       [:head]
-       [:body
-        [:div {:id "id-name"}]]])
-    
-    (def index-page
-      (-> base-html
-          (sneeze/append [:head] [:title "My Appended Site's Title"])
-          (sneeze/after [:#id-name]
-                        [:footer
-                          [:p "My footer info here."]])))
+(def base-html
+  [:html
+   [:head]
+   [:body
+    [:div {:id "id-name" 
+	       :class "class-one class-two"}]]])
 
-    ;; [:html 
-	;;   [:head 
-	;;     [:title "My Appended Site's Title"]] 
-	;;   [:body 
-	;;     [:div {:id "id-name"}] 
-	;; 	   [:footer [:p "My footer info here."]]]]
+(def index-page
+  "Sneeze makes it easy to thread HTML transformations for easy composability."
+  (-> base-html
+      (sneeze/append [:head] [:title "My Appended Site's Title"])
+      (sneeze/after [:#id-name]
+                    [:footer
+                      [:p "My footer info here."]])))
 
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; More Examples
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; (content base-html [:body] [:p "hi"])
-    ;; (append base-html [:body] [:p "hi"])
-    ;; (prepend base-html [:body] [:p "hi"])
-    ;; (after base-html [:#id-name] [:p "hi"])
-    ;; (before base-html [:#id-name] [:p "hi"])
-    ;; (substitute base-html [:#id-name] [:p "hi"])
-    ;; (html-content base-html [:#id-name] "<p>hi</p>")
-    ;; (wrap base-html [:#id-name] :div {:id "wrapper"})
-    ;; (set-attr base-html [:#id-name] :class "foo")
-    ;; (remove-attr base-html [:#id-name] :id)
-    ;; (add-class base-html [:#id-name] "class1" "class2")
-    ;; (remove-class base-html [:#id-name] "class1" "class2")
+;; [:html 
+;;   [:head 
+;;     [:title "My Appended Site's Title"]] 
+;;   [:body 
+;;     [:div {:id "id-name" :class "class-one class-two"}] 
+;; 	   [:footer [:p "My footer info here."]]]]
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; More Examples
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Replaces content of [:body] with [:p "hi"]
+(content base-html [:body] [:p "hi"])
+;; Appends [:p "hi"] to [:body]
+(append base-html [:body] [:p "hi"])
+;; Prepends [:p "hi"] to [:body]
+(prepend base-html [:body] [:p "hi"])
+;; Adds [:p "hi"] after [:#id-name]
+(after base-html [:#id-name] [:p "hi"])
+;; Adds [:p "hi"] before [:#id-name]
+(before base-html [:#id-name] [:p "hi"])
+;; Replaces [:#id-name] with [:p "hi"] 
+(substitute base-html [:#id-name] [:p "hi"])
+;; Replaces content of [:body] with "<p>hi</p>"
+(html-content base-html [:#id-name] "<p>hi</p>")
+;; Wraps [:div {:id "wrapper"}] around [#:id-name]
+(wrap base-html [:#id-name] :div {:id "wrapper"})
+;; Sets class attribute of [:#id-name] to "foo"
+(set-attr base-html [:#id-name] :class "foo")
+;; Removes id attribute of [:#id-name]
+(remove-attr base-html [:#id-name] :id)
+;; Adds the classes "class-three" and "class-four" to [:#id-name]
+(add-class base-html [:#id-name] "class-three" "class-four")
+;; Removes the classes "class-one" and "class-two" from [#id-name]
+(remove-class base-html [:#id-name] "class-one" "class-two")
+```
 	
 ## License
 
