@@ -3,8 +3,6 @@
             [net.cgrand.enlive-html :as enlive]))
 
 ;; TODO:
-;; Put on github
-;; Submit to clojars
 ;; Check with ridcully and tdammers on #clojure for input
 ;; Write tests
 
@@ -28,16 +26,17 @@
            => <link href=\"/css/file.css\" rel=\"stylesheet\" />"
   (comp print (partial apply str) enlive/emit*))
 
-;; most(all?) of these can probably be removed
+;; Private function that needs to be aliased.
 (def static-selector? #'enlive/static-selector?)
-(def transform #'enlive/transform)
-(def as-nodes #'enlive/as-nodes)
-(def cacheable #'enlive/cacheable)
 
 (defn at [node-or-nodes & rule]
   (let [[s t] rule]
-    (-> node-or-nodes as-nodes
-        (transform (if (static-selector? s) (cacheable s) s) t)
+    (-> node-or-nodes enlive/as-nodes
+        (enlive/transform
+         (if (static-selector? s)
+           (enlive/cacheable s)
+           s)
+         t)
         first)))
 
 (defmacro enlive-transformer->sneeze-transformer [transformer]
