@@ -27,7 +27,7 @@ Never used these, no comment.
 
 Add the following dependency to your `project.clj`:
 
-    [sneeze "0.1.0"]
+    [sneeze "0.2.0"]
 
 ## Usage
 
