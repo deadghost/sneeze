@@ -40,7 +40,7 @@
         first)))
 
 (defmacro enlive-transformer->sneeze-transformer [transformer]
-  `(defn ~transformer [src# selector# content#]
+  `(defn ~transformer [src# selector# & content#]
      (->> (at (xml/sexp-as-element src#)
               selector# (~(symbol (str "enlive/" transformer))
                          (enlive/html content#)))
