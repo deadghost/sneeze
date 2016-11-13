@@ -86,7 +86,18 @@ Add the following dependency to your `project.clj`:
 ;; Removes the classes "class-one" and "class-two" from [#id-name]
 (remove-class base-html [:#id-name] "class-one" "class-two")
 ```
+
+### Emitting HTML with Hiccup
+
+Include hiccup in your `project.clj`.
 	
+```clojure
+(use 'hiccup.core) ; For simplicity only, it's better to put hiccup in :require.
+
+(html index-page) ; index-page defined previously in example code.
+;; => <html><head><title>My Appended Site's Title</title></head><body><div class=\"class-one class-two\" id=\"id-name\"></div><footer><p>My footer info here.</p></footer></body></html>
+```
+
 ## License
 
 Copyright © 2016 Kenny Liu
