@@ -1,4 +1,4 @@
-(defproject sneeze "0.1.0"
+(defproject sneeze "0.2.0"
   :description "Clojure HTML templating library. Hiccup + Selectors = Wow."
   :url "https://github.com/deadghost/sneeze"
   :license {:name "Eclipse Public License"
