@@ -8,20 +8,7 @@ Clojure HTML templating library. Hiccup + Selectors = Wow.
 2. Emerging frameworks like reagent require hiccup syntax.
 3. Modifying HTML via selectors can very flexible and easy.
 
-## Library Comparison
-### Hiccup
-Sneeze uses hiccup. When you want something more powerful you can sneeze.
-### Enlive
-Sneeze also uses enlive. Enlive is great for reading .html files into
-clojure and running transformations on them using selectors. It falls short in
-hiccup compatibility and composability. Enlive is very macro heavy and this can
-cause issues when your usage isn't quite in the target use case.
-### Enliven
-Enlive v2. It's not quite baked and edible. 
-### Others
-Never used these, no comment.
-- Selmer
-- Fleet
+For a comparison of HTML libraries, see: [clj-html-comparison](https://github.com/deadghost/clj-html-comparison).
 
 ## Installation
 
