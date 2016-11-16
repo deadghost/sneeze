@@ -85,6 +85,19 @@ Include hiccup in your `project.clj`.
 ;; => <html><head><title>My Appended Site's Title</title></head><body><div class=\"class-one class-two\" id=\"id-name\"></div><footer><p>My footer info here.</p></footer></body></html>
 ```
 
+### Indentation
+
+Consider adding this to your `.emacs` for more compact indentation:
+
+```elisp
+(add-hook 'clojure-mode-hook
+	  (lambda ()
+	    (put-clojure-indent append 1)
+	    (put-clojure-indent prepend 1)
+	    (put-clojure-indent after 1)
+	    (put-clojure-indent content 1)))
+```
+
 ## License
 
 Copyright © 2016 Kenny Liu
